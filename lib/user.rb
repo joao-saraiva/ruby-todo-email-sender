@@ -1,17 +1,15 @@
 # frozen_string_literal: false
+require_relative "modules/settable"
 
 class User
+  include Settable
   attr_accessor :email, :name
 
   def set_email
-    puts "Enter your email"
-
-    self.email = $stdin.gets.chomp
+    set(:email, custom_message: "Enter your email")
   end
 
   def set_name
-    puts "Enter your name"
-
-    self.name = $stdin.gets.chomp
+    set(:name, custom_message: "Enter your name")
   end
 end
