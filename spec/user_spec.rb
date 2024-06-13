@@ -14,11 +14,11 @@ describe 'user' do
 
   describe "#set_name" do 
   it "should set name to instance variable based on user input`" do 
-    user = User.new
-    allow($stdin).to receive(:gets).and_return("john doe\n")
+      user = User.new
+      allow($stdin).to receive(:gets).and_return("john doe\n")
 
-    expect { user.set_name }.to output("Enter your name\n").to_stdout
-    expect(user.name).to eq('john doe')
+      expect { user.set_name }.to output("Enter your name\n").to_stdout
+      expect(user.name).to eq('john doe')
+    end
   end
-end
 end
