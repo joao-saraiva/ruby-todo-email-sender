@@ -3,12 +3,23 @@ require 'user'
 
 describe 'user' do
   describe "#set_email" do 
-    it "should set email to instance variable based on user input`" do 
-      user = User.new
-      allow($stdin).to receive(:gets).and_return("johndoe@gmail.com\n")
+    context "valid" do 
+      it "should set email to instance variable based on user input`" do 
+        user = User.new
+        allow($stdin).to receive(:gets).and_return("johndoe@gmail.com\n")
+  
+        expect { user.set_email }.to output("Enter your email\n").to_stdout
+        expect(user.email).to eq('johndoe@gmail.com')
+      end
+    end
 
-      expect { user.set_email }.to output("Enter your email\n").to_stdout
-      expect(user.email).to eq('johndoe@gmail.com')
+    context "invalid" do 
+      it "should raise an InvalidEmailFormatError" do 
+        user = User.new
+        allow($stdin).to receive(:gets).and_return("wrongemail\n")
+
+        expect { user.set_email }.to raise_error(InvalidEmailFormatError)
+      end
     end
   end
 
